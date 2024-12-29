@@ -1,0 +1,4 @@
+ignore:
+  # Allow globals for DragonRuby $gtk
+  - "**/*":
+      - Style/GlobalVars
