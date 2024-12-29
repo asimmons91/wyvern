@@ -29,18 +29,18 @@ class String
     chars_ref = chars
 
     chars_ref.each_with_index do |c, i|
-      if c == ":" && chars_ref[i + 1] != ":"
-        new_chars << "/"
-      end
-
-      if c.upper?
-        new_chars << if i == 0
+      if c == ":"
+        if chars_ref[i + 1] != ":"
+          new_chars << "/"
+        end
+      elsif c.upper?
+        new_chars << if i == 0 || chars_ref[i - 1] == ":"
           c.downcase!
         else
           "_#{c.downcase!}"
         end
       else
-        c
+        new_chars << c
       end
     end
 

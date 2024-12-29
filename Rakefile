@@ -2,7 +2,14 @@ desc "Setup local dev environment"
 task setup: ["dev:stubs"]
 
 desc "Run all test suites"
-task test: ["test:support"]
+task :test do
+  task("test:suite").invoke("wyvernsupport")
+end
+
+desc "Run all test suites in CI"
+task :ci do
+  task("test:ci").invoke("wyvernsupport")
+end
 
 namespace :dev do
   desc "Download/update DragonRuby Yard stubs"
@@ -26,6 +33,6 @@ namespace :test do
   task :ci, [:suite] do |t, args|
     sh "rm -rf tmp && mkdir tmp"
     sh "./dragonruby #{args[:suite]} --eval tests/test.rb --no-tick | tee tmp/#{args[:suite]}_tests.log"
-    sh "grep '[Game] 0 test(s) failed.' tmp/#{args[:suite]}_tests.log"
+    sh "grep '\\[Game\\] 0 test(s) failed.' tmp/#{args[:suite]}_tests.log"
   end
 end
