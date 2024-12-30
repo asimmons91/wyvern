@@ -44,6 +44,7 @@ GEM
     unicode-display_width (3.1.3)
       unicode-emoji (~> 4.0, >= 4.0.4)
     unicode-emoji (4.0.4)
+    yard (0.9.37)
 
 PLATFORMS
   ruby
@@ -52,6 +53,7 @@ PLATFORMS
 DEPENDENCIES
   rake
   standard
+  yard
 
 BUNDLED WITH
    2.6.2
