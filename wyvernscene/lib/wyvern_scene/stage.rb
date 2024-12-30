@@ -33,7 +33,7 @@ module WyvernScene
     def go_to_scene(scene)
       if scene.is_a? Symbol
         key = scene
-      elsif scene.is_a? Scene
+      elsif scene.respond_to? :key
         key = scene.key
       else
         raise InvalidSceneKeyError.new
@@ -48,7 +48,7 @@ module WyvernScene
       end
 
       @current_scene&.on_exit
-      @current_scene = @scenes[key]
+      @current_scene = @scenes[key].new self
       @current_scene.on_enter
     end
 
