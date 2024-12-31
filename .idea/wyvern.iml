@@ -62,21 +62,18 @@
     <option name="myRootTask">
       <RakeTaskImpl id="rake">
         <subtasks>
-          <RakeTaskImpl description="Run all test suites in CI" fullCommand="ci" id="ci" />
           <RakeTaskImpl id="dev">
             <subtasks>
               <RakeTaskImpl description="Download/update DragonRuby Yard stubs" fullCommand="dev:stubs" id="stubs" />
+              <RakeTaskImpl description="Sync WyvernSupport with other libraries for testing" fullCommand="dev:sync" id="sync" />
             </subtasks>
           </RakeTaskImpl>
           <RakeTaskImpl description="Setup local dev environment" fullCommand="setup" id="setup" />
           <RakeTaskImpl description="Run all test suites" fullCommand="test" id="test" />
           <RakeTaskImpl id="test">
             <subtasks>
-              <RakeTaskImpl description="Run a test suite in a CI friendly manner" fullCommand="test:ci[suite]" id="ci[suite]" />
-              <RakeTaskImpl description="Run a test suite" fullCommand="test:suite[suite]" id="suite[suite]" />
+              <RakeTaskImpl description="Run WyvernScene test suite" fullCommand="test:scene" id="scene" />
               <RakeTaskImpl description="Run WyvernSupport test suite" fullCommand="test:support" id="support" />
-              <RakeTaskImpl description="" fullCommand="test:ci" id="ci" />
-              <RakeTaskImpl description="" fullCommand="test:suite" id="suite" />
             </subtasks>
           </RakeTaskImpl>
         </subtasks>
