@@ -97,6 +97,7 @@ module WyvernScene
     #
     #   class MyScene < WyvernScene::Scene
     #     def on_enter
+    #       super
     #       add_actor(Player)
     #       add_actor(Enemy)
     #     end
@@ -110,6 +111,7 @@ module WyvernScene
     #
     #   class MyScene < WyvernScene::Scene
     #     def on_exit
+    #       super
     #       my_cleanup_helper_method()
     #     end
     #   end

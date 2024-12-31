@@ -1,5 +1,7 @@
 module WyvernScene
   class Stage
+    include Helpers::Keyable
+
     # The active Scene
     # @return [WyvernScene::Scene]
     attr_reader :current_scene
@@ -64,6 +66,7 @@ module WyvernScene
     #
     #   Class MyStage < WyvernScene::Stage
     #     def on_boot
+    #       super
     #       add_scene(Start)
     #       add_scene(Play)
     #       add_scene(End)

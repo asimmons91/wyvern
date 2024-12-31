@@ -5,6 +5,7 @@ class SceneTestActor < WyvernScene::Actor
   attr_reader :add_called, :remove_called
 
   def on_added
+    super
     @add_called = true
   end
 

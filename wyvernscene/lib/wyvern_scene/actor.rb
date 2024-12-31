@@ -71,6 +71,13 @@ module WyvernScene
       @behaviors.has_key? klass.key
     end
 
+    # Generic Hash for shared state. Backed by $args.state
+    # @return [Hash]
+    def state
+      $args.state[scene.key] ||= {}
+      $args.state[scene.key][id] ||= {}
+    end
+
     # Main tick handler for the Actor
     # @param [GTK::Args] args
     # @return [void]

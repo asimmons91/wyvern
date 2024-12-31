@@ -10,10 +10,12 @@ class BehaviorTestOtherBehavior < WyvernScene::Behavior
   attr_accessor :foo, :add_called, :remove_called
 
   def on_added
+    super
     @add_called = true
   end
 
   def on_removed
+    super
     @remove_called = true
   end
 end

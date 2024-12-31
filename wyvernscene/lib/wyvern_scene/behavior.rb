@@ -13,6 +13,12 @@ module WyvernScene
       yield self if block_given?
     end
 
+    # Generic Hash for shared state with parent Actor
+    # @return [Hash]
+    def state
+      actor.state
+    end
+
     # Main tick handler for the Behavior
     # @param [GTK::Args] args
     # @return [void]

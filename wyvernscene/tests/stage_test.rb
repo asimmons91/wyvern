@@ -4,6 +4,7 @@ class StageTestScene < WyvernScene::Scene
   attr_reader :enter_called, :exit_called
 
   def on_enter
+    super
     @enter_called = true
   end
 

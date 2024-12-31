@@ -11,12 +11,13 @@ class ActorTestActor < WyvernScene::Actor
   attr_accessor :add_called, :remove_called, :foo
 
   def on_added
+    super
     @add_called = true
   end
 
   def on_removed
-    @remove_called = true
     super
+    @remove_called = true
   end
 
   def tick(args)
