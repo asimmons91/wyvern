@@ -37,8 +37,11 @@ jobs:
       - name: Setup DragonRuby
         uses: kfischer-okarin/download-dragonruby@v1
 
+      - name: Run Setup
+        run: bin/rake dev:sync
+
       - name: Run Tests
         env:
           SDL_VIDEODRIVER: dummy
           SDL_AUDIODRIVER: dummy
-        run: bin/rake ci
+        run: bin/rake test

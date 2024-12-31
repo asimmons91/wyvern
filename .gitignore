@@ -153,3 +153,5 @@ build-iPhoneSimulator/
 /logs
 /.dragon_stubs
 /dragonruby
+
+deps/

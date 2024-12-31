@@ -1,14 +1,10 @@
 desc "Setup local dev environment"
-task setup: ["dev:stubs"]
+task setup: %w[dev:stubs dev:sync]
 
 desc "Run all test suites"
 task :test do
-  task("test:suite").invoke("wyvernsupport")
-end
-
-desc "Run all test suites in CI"
-task :ci do
-  task("test:ci").invoke("wyvernsupport")
+  run_tests "wyvernsupport"
+  run_tests "wyvernscene"
 end
 
 namespace :dev do
@@ -18,21 +14,29 @@ namespace :dev do
     sh "git clone https://github.com/owenbutler/dragonruby-yard-doc.git .dragon_stubs"
     sh "rm -rf .dragon_stubs/.git"
   end
+
+  desc "Sync WyvernSupport with other libraries for testing"
+  task :sync do
+    sh "rm -rf wyvernscene/deps"
+    sh "mkdir -p wyvernscene/deps"
+    sh "cp -R wyvernsupport/lib/* wyvernscene/deps"
+  end
 end
 
 namespace :test do
   desc "Run WyvernSupport test suite"
-  task support: ["test:suite[wyvernsupport]"]
-
-  desc "Run a test suite"
-  task :suite, [:suite] do |t, args|
-    sh "./dragonruby #{args[:suite]} --eval tests/test.rb --no-tick"
+  task :support do
+    run_tests "wyvernsupport"
   end
 
-  desc "Run a test suite in a CI friendly manner"
-  task :ci, [:suite] do |t, args|
-    sh "rm -rf tmp && mkdir tmp"
-    sh "./dragonruby #{args[:suite]} --eval tests/test.rb --no-tick | tee tmp/#{args[:suite]}_tests.log"
-    sh "grep '\\[Game\\] 0 test(s) failed.' tmp/#{args[:suite]}_tests.log"
+  desc "Run WyvernScene test suite"
+  task :scene do
+    run_tests "wyvernscene"
   end
+end
+
+def run_tests(lib)
+  sh "mkdir -p tmp"
+  sh "./dragonruby #{lib} --eval tests/test.rb --no-tick | tee tmp/#{lib}_tests.log"
+  sh "grep '\\[Game\\] 0 test(s) failed.' tmp/#{lib}_tests.log"
 end
